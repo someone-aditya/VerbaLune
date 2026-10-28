@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LingoQuest</title>
-  <meta name="description" content="LingoQuest — Learn a language. Unlock the world." />
+  <title>Verbalune — Every word takes you further.</title>
+  <meta name="description" content="Verbalune — Every word takes you further. Learn, speak, and discover through a cosmic language journey." />
   <style>
     :root {
       --bg: #f5f7fb;
@@ -1857,6 +1857,31 @@
       50% { transform: translateX(6px); }
       75% { transform: translateX(-4px); }
     }
+
+    /* VERBALUNE — COSMIC BRAND LAYER */
+    :root {
+      --bg: #f5f3ff; --surface-2: #eef4ff; --surface-3: #f6f1ff;
+      --primary: #7157e8; --primary-2: #9a72ff; --secondary: #23c9d7;
+      --glow: rgba(113,87,232,.24); --navy: #17152f;
+    }
+    body[data-theme="dark"] {
+      --bg: #090b1c; --surface: #11152b; --surface-2: #171b38; --surface-3: #1c1740;
+      --text: #f6f3ff; --muted: #aaa8ca; --primary: #9d86ff; --primary-2: #c090ff;
+      --secondary: #35dce5; --glow: rgba(157,134,255,.28); --navy: #f2efff;
+    }
+    body[data-theme="dark"]::before {
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.32; z-index:-1;
+      background-image:radial-gradient(circle at 12% 18%,rgba(255,255,255,.8) 0 1px,transparent 1.5px),radial-gradient(circle at 76% 28%,rgba(53,220,229,.7) 0 1px,transparent 1.5px),radial-gradient(circle at 55% 76%,rgba(192,144,255,.7) 0 1px,transparent 1.5px);
+      background-size:120px 120px,170px 170px,210px 210px;
+    }
+    .brand-mark { border-radius:50% 50% 50% 12px; background:linear-gradient(145deg,#8c6cff,#35dce5); box-shadow:0 0 26px var(--glow); font-size:1.65rem; }
+    .brand { font-size:1.05rem; letter-spacing:.04em; }
+    .landing-hero { background:radial-gradient(circle at 80% 20%,rgba(53,220,229,.12),transparent 30%),radial-gradient(circle at 15% 80%,rgba(157,134,255,.16),transparent 36%); }
+    .nova-card { background:radial-gradient(circle at 50% 42%,rgba(53,220,229,.16),transparent 34%),linear-gradient(145deg,rgba(157,134,255,.14),rgba(17,21,43,.04)); border-color:rgba(157,134,255,.3); }
+    .nova-body { background:linear-gradient(145deg,#9d86ff,#35dce5); border-radius:48% 48% 44% 44%; }
+    .nova-body::after { box-shadow:0 0 0 7px rgba(53,220,229,.08); }
+    .nav-item.active { box-shadow:0 8px 24px var(--glow); }
+    .primary-btn { background:linear-gradient(135deg,var(--primary),var(--primary-2)); }
   </style>
 </head>
 <body data-theme="light">
@@ -1864,10 +1889,10 @@
 
   <script>
     /* =====================================================
-       LINGOQUEST — GLOBAL CONFIGURATION
+       VERBALUNE — GLOBAL CONFIGURATION
     ===================================================== */
 
-    const STORAGE_KEY = 'lingoquest_v1';
+    const STORAGE_KEY = 'lingoquest_v1'; // Kept for backward-compatible progress migration
 
     function getLocalDateKey(date = new Date()) {
       return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -2493,7 +2518,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'lingoquest_progress.json';
+        a.download = 'verbalune_progress.json';
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -2507,7 +2532,7 @@
         try {
           parsed = JSON.parse(text);
         } catch (error) {
-          UIManager.showToast('That file is not valid LingoQuest JSON.');
+          UIManager.showToast('That file is not valid Verbalune progress JSON.');
           return;
         }
         const validated = this.normalizeState(parsed);
@@ -2793,7 +2818,7 @@
         if (!quest || quest.claimed || quest.progress < quest.target) return;
         quest.claimed = true;
         state.coins += quest.reward;
-        UIManager.showToast(`Quest complete! +${quest.reward} coins`);
+        UIManager.showToast(`Quest complete! +${quest.reward} Luna Coins`);
       }
     };
 
@@ -3328,8 +3353,8 @@
             <aside class="sidebar" aria-label="Main navigation">
               <div>
                 <div class="brand">
-                  <div class="brand-mark">Q</div>
-                  <div>LingoQuest</div>
+                  <div class="brand-mark" aria-hidden="true">☾</div>
+                  <div>Verbalune</div>
                 </div>
                 <nav class="nav-list" aria-label="Primary navigation">
                   ${this.renderNavItems()}
@@ -3375,13 +3400,13 @@
       },
       renderNavItems() {
         const items = [
-          { id: 'learn', icon: '🎒', label: 'Learn' },
-          { id: 'practice', icon: '🧠', label: 'Practice' },
-          { id: 'vocabulary', icon: '🗂️', label: 'Vocabulary' },
+          { id: 'learn', icon: '🌙', label: 'Journey' },
+          { id: 'practice', icon: '🛰️', label: 'Training Station' },
+          { id: 'vocabulary', icon: '✨', label: 'Word Vault' },
           { id: 'quests', icon: '🧭', label: 'Quests' },
-          { id: 'leaderboard', icon: '🏆', label: 'Leaderboard' },
+          { id: 'leaderboard', icon: '⭐', label: 'Star League' },
           { id: 'achievements', icon: '🏅', label: 'Achievements' },
-          { id: 'world', icon: '🌍', label: 'World' },
+          { id: 'world', icon: '🪐', label: 'Verbalune Atlas' },
           { id: 'profile', icon: '👤', label: 'Profile' }
         ];
         const current = state.session.currentView || 'learn';
@@ -3394,9 +3419,9 @@
       },
       renderBottomNav() {
         const items = [
-          { id: 'learn', label: 'Learn', icon: '🎒' },
-          { id: 'practice', label: 'Practice', icon: '🧠' },
-          { id: 'vocabulary', label: 'Words', icon: '🗂️' },
+          { id: 'learn', label: 'Journey', icon: '🌙' },
+          { id: 'practice', label: 'Train', icon: '🛰️' },
+          { id: 'vocabulary', label: 'Vault', icon: '✨' },
           { id: 'quests', label: 'Quests', icon: '🧭' },
           { id: 'profile', label: 'Profile', icon: '👤' }
         ];
@@ -3487,7 +3512,7 @@
         const queue = VocabularyManager.getReviewQueue();
         return `
           <section class="section-header">
-            <h2>Practice Hub</h2>
+            <h2>Training Station</h2>
             <button class="primary-btn" data-action="start-practice-review">Quick Review</button>
           </section>
           <div class="profile-list">
@@ -3520,7 +3545,7 @@
         const vocab = Object.values(state.vocabulary || {}).slice(0, 18);
         return `
           <div class="section-header">
-            <h2>Vocabulary</h2>
+            <h2>Word Vault</h2>
             <div class="pill">${Object.keys(state.vocabulary || {}).length} saved words</div>
           </div>
           <input class="search-box" id="vocabSearch" placeholder="Search vocabulary..." aria-label="Search vocabulary" />
@@ -3577,10 +3602,10 @@
         ];
         return `
           <div class="section-header">
-            <h2>Local League — Demo Mode</h2>
+            <h2>Star League — Demo Mode</h2>
             <div class="pill">⚠️ Local only</div>
           </div>
-          <p class="subtitle" style="margin-bottom:18px;">Local League — Demo Mode. This leaderboard uses local demo data only. Online multiplayer rankings require accounts and backend support.</p>
+          <p class="subtitle" style="margin-bottom:18px;">Star League is currently local demo mode. Online rankings will require accounts and backend support.</p>
           <div class="quest-list">
             ${demoNames.map((person, index) => `
               <article class="quest-card">
@@ -3624,7 +3649,7 @@
         const course = AppState.getCurrentLanguageInfo();
         return `
           <div class="section-header">
-            <h2>World Journey</h2>
+            <h2>Verbalune Atlas</h2>
             <div class="pill">${course.name}</div>
           </div>
           <div class="destinations-list">
@@ -3707,7 +3732,7 @@
             </div>
             <div class="stat-tile coin" data-action="open-coin-info">
               <div>
-                <div class="label">Coins</div>
+                <div class="label">Luna Coins</div>
                 <div class="value">🪙 ${state.coins}</div>
               </div>
               <div class="icon-circle">🪙</div>
@@ -3736,9 +3761,9 @@
           <div class="landing-screen">
             <div class="landing-hero">
               <div class="landing-copy">
-                <div class="mini-kicker">100+ LANGUAGES • ONE ADVENTURE</div>
-                <h1>Learn a language.<br/>Unlock the world.</h1>
-                <p>Learn through bite-sized lessons, quests, practice loops, and a world journey built around real language progress.</p>
+                <div class="mini-kicker">LEARN • SPEAK • DISCOVER</div>
+                <h1>Every word takes<br/>you further.</h1>
+                <p>Explore languages through bite-sized lessons, speaking, listening, quests, and a cosmic journey that grows with your progress.</p>
                 <div class="landing-actions">
                   <button class="primary-btn" data-action="get-started">GET STARTED</button>
                   <button class="secondary-btn" data-action="resume-progress">I ALREADY HAVE PROGRESS</button>
@@ -3773,8 +3798,8 @@
               </div>
               <div class="land-card">
                 <div style="font-size:1.8rem;">🗺️</div>
-                <strong>Adventure maps</strong>
-                <span>Unlock destinations and explore a world journey as your course grows.</span>
+                <strong>Cosmic Journey</strong>
+                <span>Travel through planets, moons, and learning stations as your language skills grow.</span>
               </div>
               <div class="land-card">
                 <div style="font-size:1.8rem;">🎉</div>
@@ -4282,7 +4307,7 @@
             this.showToast('XP powers your level, quests, and world progress.');
             break;
           case 'open-coin-info':
-            this.showToast('Coins are earned through lessons, quests, and achievements.');
+            this.showToast('Luna Coins are earned through lessons, quests, and achievements.');
             break;
           case 'claim-quest':
             QuestManager.claimQuest(dataset.questId);
